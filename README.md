@@ -2,7 +2,7 @@
 
 This project aims at analyzing disaster messages using ETL, ML and NLP pipeline.
 
-Th project consists of 3 phrases:
+The project consists of 3 phases:
 
 1- Extracting, transforming and loading the data, then, preprocessing data to be ready for the modeling phase.
 
@@ -45,7 +45,7 @@ Th project consists of 3 phrases:
 
 ### Text classification
 
-<img src = 'images/out2' >
+<img src = 'images/out2.png' >
 
 ## Data
 
