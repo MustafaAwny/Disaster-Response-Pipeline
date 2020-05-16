@@ -19,6 +19,8 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.model_selection import GridSearchCV
+
 
 def load_data(database_filepath):
     '''
@@ -72,17 +74,22 @@ def build_model():
     Args:
         None
     Return:
-        pipleline_ada : pipeline object
+        cv - Result of the GridSearchCV model
     '''
     
     #Defining the pipeline
+    param = {'n_estimators':[50,100],'learning_rate':[.01, 1]}
+    
+    
     pipeline_ada = Pipeline([
     ('vect', CountVectorizer(tokenizer = tokenize)),
     ('tfidf', TfidfTransformer(use_idf = True)),
-    ('clf', MultiOutputClassifier(AdaBoostClassifier(n_estimators = 70, learning_rate = 1)))
+    ('clf', MultiOutputClassifier(AdaBoostClassifier(random_state=0)))
     ])
     
-    return pipeline_ada
+    cv = GridSearchCV(pipeline_ada, param_grid=param, n_jobs=1)
+    
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
